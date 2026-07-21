@@ -1,558 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Robux Generator — Roblox</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --red:#e8193c;
-  --red2:#ff3355;
-  --robux:#00a2ff;
-  --bg:#0f0010;
-  --card:#150016;
-}
-body{
-  background:var(--bg);
-  font-family:'Nunito',sans-serif;
-  color:#fff;min-height:100vh;overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 50% at 30% 30%,rgba(232,25,60,0.12) 0%,transparent 60%),
-    radial-gradient(ellipse 50% 50% at 70% 70%,rgba(0,162,255,0.08) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 30% at 50% 10%,rgba(180,0,255,0.08) 0%,transparent 50%);
-}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roblox - Get Free Robux</title>
+    <link rel="icon" type="image/x-icon" href="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700458ba7cab444a522b7c8e71b8233099cf2c.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Floating Robux symbols */
-.floaters{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.floater{
-  position:absolute;
-  font-size:20px;opacity:0.04;
-  animation:float linear infinite;
-  user-select:none;
-}
-@keyframes float{
-  from{transform:translateY(100vh) rotate(0deg);opacity:0.06;}
-  to{transform:translateY(-100px) rotate(360deg);opacity:0;}
-}
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0d0e12;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-nav{
-  position:relative;z-index:10;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 32px;
-  border-bottom:1px solid rgba(232,25,60,0.15);
-  background:rgba(15,0,16,0.85);backdrop-filter:blur(20px);
-}
-.nav-logo{
-  display:flex;align-items:center;gap:10px;
-  font-family:'Fredoka One',sans-serif;font-size:22px;letter-spacing:1px;
-}
-.roblox-r{
-  width:32px;height:32px;
-  background:var(--red);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;font-weight:900;color:#fff;
-  box-shadow:0 0 16px rgba(232,25,60,0.4);
-}
-.nav-back{
-  font-size:13px;color:rgba(255,255,255,0.3);
-  text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;
-}
-.nav-back:hover{color:var(--red);}
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1b1d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00b06f;
+            border-radius: 10px;
+        }
 
-.hero{
-  position:relative;z-index:10;
-  text-align:center;padding:50px 20px 20px;
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(232,25,60,0.1);border:1px solid rgba(232,25,60,0.3);
-  border-radius:100px;padding:7px 20px;
-  font-size:13px;font-weight:700;color:var(--red);
-  margin-bottom:20px;animation:fadeDown 0.5s ease both;
-}
-.hero h1{
-  font-family:'Fredoka One',sans-serif;
-  font-size:clamp(48px,10vw,100px);
-  line-height:0.95;letter-spacing:1px;
-  animation:fadeDown 0.6s ease both;animation-delay:0.1s;
-}
-.hero h1 .robux-blue{color:var(--robux);}
-.hero h1 .robux-red{color:var(--red);}
-.hero-sub{
-  margin-top:14px;font-size:17px;font-weight:600;
-  color:rgba(255,255,255,0.4);
-  animation:fadeDown 0.7s ease both;animation-delay:0.2s;
-}
+        /* ===== Navbar ===== */
+        .navbar {
+            width: 100%;
+            max-width: 1300px;
+            height: 80px;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(26, 27, 29, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-.main-card{
-  position:relative;z-index:10;
-  width:100%;max-width:520px;
-  margin:28px auto 60px;padding:0 16px;
-  animation:fadeUp 0.7s ease both;animation-delay:0.3s;
-}
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
-.card-box{
-  background:linear-gradient(145deg,#180018,#100014);
-  border:1px solid rgba(232,25,60,0.2);
-  border-radius:24px;overflow:hidden;
-  box-shadow:0 0 60px rgba(232,25,60,0.08),0 0 0 1px rgba(255,255,255,0.02);
-}
+        .profileimg {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #00b06f;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .profileimg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.card-header{
-  padding:20px 28px;
-  background:linear-gradient(135deg,rgba(232,25,60,0.15),rgba(0,162,255,0.08));
-  border-bottom:1px solid rgba(232,25,60,0.12);
-  display:flex;align-items:center;gap:14px;
-}
-.robux-icon{
-  width:52px;height:52px;border-radius:16px;
-  background:linear-gradient(135deg,#8b0020,var(--red));
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;
-  box-shadow:0 0 20px rgba(232,25,60,0.35);
-}
-.card-header h2{
-  font-family:'Fredoka One',sans-serif;font-size:22px;letter-spacing:0.5px;
-}
-.card-header p{font-size:13px;color:rgba(255,255,255,0.4);margin-top:2px;}
+        .text .partner {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .text .partner h4 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .badge img {
+            width: 18px;
+            height: 18px;
+        }
+        .text p {
+            font-size: 13px;
+            color: #a0a0a0;
+            margin-top: 1px;
+        }
 
-.card-body{padding:30px 28px;}
+        .navbar button {
+            background: linear-gradient(145deg, #00b06f, #008c57);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(0, 176, 111, 0.3);
+            letter-spacing: 0.3px;
+        }
+        .navbar button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 28px rgba(0, 176, 111, 0.5);
+        }
 
-/* Steps */
-.steps{display:flex;gap:0;margin-bottom:28px;}
-.step{
-  flex:1;text-align:center;font-size:11px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;
-  color:rgba(255,255,255,0.2);
-  padding-bottom:10px;
-  border-bottom:2px solid rgba(255,255,255,0.06);
-  transition:all 0.3s;
-}
-.step.active{color:var(--red);border-bottom-color:var(--red);}
-.step.done{color:rgba(232,25,60,0.5);border-bottom-color:rgba(232,25,60,0.3);}
+        /* ===== Hero Container ===== */
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            min-height: calc(100vh - 80px);
+            background: radial-gradient(ellipse at 30% 20%, #1a2a24, #0d0e12 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Input */
-.field{margin-bottom:20px;}
-.field label{
-  display:block;font-size:13px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;
-  color:rgba(255,255,255,0.45);margin-bottom:8px;
-}
-.input-wrap{position:relative;}
-.field input{
-  width:100%;padding:14px 16px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:12px;color:#fff;
-  font-family:'Nunito',sans-serif;font-size:16px;font-weight:600;
-  outline:none;transition:all 0.2s;
-}
-.field input:focus{
-  border-color:var(--red);
-  box-shadow:0 0 0 3px rgba(232,25,60,0.12);
-}
-.field input::placeholder{color:rgba(255,255,255,0.18);}
-.search-btn{
-  position:absolute;right:8px;top:50%;transform:translateY(-50%);
-  background:linear-gradient(135deg,#8b0020,var(--red));
-  border:none;border-radius:8px;
-  color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;
-  padding:8px 16px;cursor:pointer;transition:all 0.2s;
-}
-.search-btn:hover{box-shadow:0 0 16px rgba(232,25,60,0.4);}
+        /* Animated background */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 176, 111, 0.04), transparent 60%);
+            animation: rotateBg 30s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-/* Profile card */
-.profile-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:14px;padding:20px;
-  display:flex;align-items:center;gap:16px;
-  margin-bottom:20px;
-  animation:fadeUp 0.4s ease both;
-}
-.profile-avatar{
-  width:60px;height:60px;border-radius:14px;
-  background:linear-gradient(135deg,#1a0020,#2a0030);
-  border:2px solid rgba(232,25,60,0.3);
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;overflow:hidden;flex-shrink:0;
-}
-.profile-avatar img{width:100%;height:100%;object-fit:cover;}
-.profile-info h3{font-family:'Fredoka One',sans-serif;font-size:20px;letter-spacing:0.5px;}
-.profile-info p{font-size:13px;color:rgba(255,255,255,0.4);margin-top:2px;}
-.profile-badge{
-  display:inline-block;margin-top:6px;
-  background:rgba(0,162,255,0.1);border:1px solid rgba(0,162,255,0.2);
-  border-radius:6px;padding:2px 10px;
-  font-size:11px;font-weight:700;color:var(--robux);letter-spacing:1px;
-}
-.verified-check{margin-left:auto;font-size:24px;}
+        .boxholder {
+            width: 100%;
+            max-width: 580px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+        }
 
-/* Robux amount buttons */
-.robux-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.robux-btn{
-  padding:14px 8px;text-align:center;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:12px;cursor:pointer;transition:all 0.2s;
-}
-.robux-btn:hover,.robux-btn.selected{
-  background:rgba(232,25,60,0.1);
-  border-color:var(--red);
-}
-.robux-btn-num{
-  font-family:'Fredoka One',sans-serif;font-size:20px;color:#fff;display:block;
-}
-.robux-btn.selected .robux-btn-num{color:var(--red);}
-.robux-btn-label{font-size:10px;color:rgba(255,255,255,0.3);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
-.robux-symbol{color:var(--robux);font-size:13px;}
+        /* ===== Cards ===== */
+        .box1 {
+            width: 100%;
+            background: rgba(26, 27, 29, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 40px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-/* Progress */
-.progress-track{
-  width:100%;height:8px;
-  background:rgba(255,255,255,0.05);
-  border-radius:4px;overflow:hidden;
-}
-.progress-fill{
-  height:100%;width:0%;
-  background:linear-gradient(90deg,#8b0020,var(--red),#ff6688);
-  border-radius:4px;
-  box-shadow:0 0 12px rgba(232,25,60,0.5);
-  transition:width 0.3s ease;
-}
-.progress-msg{
-  font-size:13px;color:rgba(255,255,255,0.4);
-  text-align:center;margin-top:10px;font-weight:600;
-}
+        .logo {
+            width: 180px;
+            margin-bottom: 16px;
+        }
+        .logo img {
+            width: 100%;
+            filter: drop-shadow(0 4px 20px rgba(0, 176, 111, 0.2));
+        }
 
-/* Verify */
-.verify-box{
-  background:rgba(232,25,60,0.05);
-  border:1px solid rgba(232,25,60,0.2);
-  border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;
-}
-.verify-icon{font-size:52px;margin-bottom:10px;}
-.verify-title{font-family:'Fredoka One',sans-serif;font-size:26px;color:var(--red);}
-.robux-ready{
-  font-family:'Fredoka One',sans-serif;font-size:48px;
-  color:var(--robux);margin:6px 0;
-  text-shadow:0 0 20px rgba(0,162,255,0.4);
-}
-.verify-username{font-size:15px;color:rgba(255,255,255,0.4);font-weight:600;}
+        .maintxt {
+            font-size: 15px;
+            color: #b0b0b0;
+            line-height: 1.7;
+            max-width: 420px;
+            margin-bottom: 18px;
+        }
 
-.cta-btn{
-  width:100%;padding:16px;
-  background:linear-gradient(135deg,#8b0020,var(--red));
-  border:none;border-radius:14px;color:#fff;
-  font-family:'Fredoka One',sans-serif;
-  font-size:20px;letter-spacing:1px;
-  cursor:pointer;transition:all 0.3s;
-}
-.cta-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 40px rgba(232,25,60,0.4);
-  background:linear-gradient(135deg,#a0001f,var(--red2));
-}
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, #b0b0b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.step-panel{display:none;}
-.step-panel.active{display:block;animation:fadeUp 0.4s ease both;}
+        .box1 input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .box1 input:focus {
+            border-color: #00b06f;
+            box-shadow: 0 0 0 4px rgba(0, 176, 111, 0.15);
+        }
+        .box1 input::placeholder {
+            color: #666;
+        }
 
-/* Loading state */
-.loading-dots::after{
-  content:'...';
-  animation:dots 1.5s infinite;
-}
-@keyframes dots{0%{content:'.';}33%{content:'..';}66%{content:'...';}100%{content:'....';}}
+        .box1 button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 60px;
+            border: none;
+            background: linear-gradient(145deg, #00b06f, #008c57);
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0, 176, 111, 0.25);
+            margin-top: 14px;
+        }
+        .box1 button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 176, 111, 0.4);
+        }
 
-.not-found{
-  background:rgba(255,100,50,0.06);
-  border:1px solid rgba(255,100,50,0.2);
-  border-radius:12px;padding:16px;text-align:center;
-  color:rgba(255,150,100,0.8);font-size:14px;font-weight:600;
-  margin-top:12px;display:none;
-}
+        /* ===== Animation Box ===== */
+        .boxanimation .loeader {
+            margin: 20px 0;
+        }
+        .fade-image {
+            width: 100px;
+            animation: pulseGlow 1.8s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 30px #00b06f); }
+        }
 
-.trust-row{
-  display:flex;justify-content:center;gap:20px;
-  margin-top:16px;font-size:12px;font-weight:700;
-  color:rgba(255,255,255,0.25);flex-wrap:wrap;letter-spacing:0.5px;
-}
+        .animationtxt {
+            font-size: 17px;
+            color: #c0c0c0;
+            font-weight: 500;
+        }
+        .animationtxt b {
+            color: #00b06f;
+            font-weight: 600;
+        }
 
-@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        /* ===== Robux List ===== */
+        .box3 {
+            width: 100%;
+            padding: 6px 0;
+        }
+        .box3 .title {
+            margin-bottom: 8px;
+        }
 
-.spin{animation:spin 0.8s linear infinite;display:inline-block;}
-@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: 0.2s;
+        }
+        .row:last-child {
+            border-bottom: none;
+        }
+        .row:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+        }
 
-@media(max-width:480px){
-  nav{padding:14px 16px;}
-  .card-body{padding:22px 18px;}
-  .robux-grid{grid-template-columns:repeat(2,1fr);}
-}
-</style>
+        .price {
+            font-size: 15px;
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        .details {
+            background: rgba(0, 176, 111, 0.12);
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 176, 111, 0.15);
+        }
+        .details:hover {
+            background: #00b06f;
+            transform: scale(1.04);
+            box-shadow: 0 4px 24px rgba(0, 176, 111, 0.35);
+            border-color: transparent;
+        }
+        .details .robux_total {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #fff;
+        }
+        .details .pic {
+            width: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .details .pic img {
+            width: 100%;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+        }
+
+        /* ===== Box4 (Verify) ===== */
+        .box4 .maintxt2 {
+            font-size: 15px;
+            color: #b0b0b0;
+            line-height: 1.7;
+            margin: 12px 0 20px;
+        }
+        .box4 button {
+            background: linear-gradient(145deg, #f0b400, #d49a00);
+            border: none;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 24px rgba(240, 180, 0, 0.3);
+        }
+        .box4 button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(240, 180, 0, 0.5);
+        }
+
+        /* ===== Modal ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #1a1b1d;
+            padding: 40px 36px;
+            border-radius: 28px;
+            max-width: 460px;
+            width: 92%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: modalPop 0.3s ease;
+        }
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-content h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .modal-content p {
+            font-size: 15px;
+            line-height: 2;
+            color: #c0c0c0;
+        }
+        .modal-content p strong {
+            color: #00b06f;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
+        .close-btn:hover {
+            color: #00b06f;
+            transform: rotate(90deg);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            width: 100%;
+            max-width: 1300px;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(13, 14, 18, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .footer span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #888;
+        }
+        .footer p {
+            font-size: 11px;
+            color: #555;
+            margin-top: 6px;
+            line-height: 1.6;
+        }
+        .footer p strong {
+            color: #00b06f;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0 16px;
+                height: 70px;
+            }
+            .profileimg {
+                width: 40px;
+                height: 40px;
+            }
+            .text .partner h4 {
+                font-size: 15px;
+            }
+            .text p {
+                font-size: 11px;
+            }
+            .navbar button {
+                padding: 8px 18px;
+                font-size: 12px;
+            }
+            .box1 {
+                padding: 28px 18px;
+                border-radius: 20px;
+            }
+            .logo {
+                width: 140px;
+            }
+            .row {
+                padding: 10px 4px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .details {
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .box1 {
+                padding: 20px 14px;
+            }
+            .row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 6px;
+            }
+            .details {
+                justify-content: center;
+                padding: 10px;
+            }
+            .price {
+                text-align: center;
+            }
+        }
+
+        /* ===== Utility ===== */
+        .hidden {
+            display: none !important;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .w-full {
+            width: 100%;
+        }
+    </style>
 </head>
-<body data-page="robux">
+<body>
 
-<div class="floaters" id="floaters"></div>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="profile">
+            <div class="profileimg">
+                <img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="avatar" />
+            </div>
+            <div class="text">
+                <div class="partner">
+                    <h4>Sofiatata26</h4>
+                    <div class="badge">
+                        <img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700458ba7cab444a522b7c8e71b8233099cf2c.png" alt="badge" />
+                    </div>
+                </div>
+                <p>✨ Partner Program</p>
+            </div>
+        </div>
+        <button id="how-it-works-btn"><i class="fas fa-question-circle" style="margin-right: 8px;"></i>How it works?</button>
+    </nav>
 
-<nav>
-  <div class="nav-logo" style="display:flex;align-items:center;gap:10px;"><img src="data:image/png;base64,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" style="height:36px;width:36px;object-fit:cover;border-radius:8px;"><span style="font-family:Fredoka One,sans-serif;font-size:18px;">Robux<span style="color:#e8193c;">Gen</span></span></div>
-  <a href="../index.html" class="nav-back">← Hub</a>
-</nav>
+    <!-- ===== HERO ===== -->
+    <main class="container">
+        <div class="boxholder">
 
-<div class="hero">
-  <div class="hero-badge">💎 INSTANT DELIVERY · NO SURVEY</div>
-  <h1><span class="robux-blue">FREE</span><br><span class="robux-red">ROBUX</span></h1>
-  <p class="hero-sub">Enter your Roblox username to get started — it's completely free</p>
-</div>
+            <!-- Step 1: Enter Username -->
+            <div class="box1 box2" id="step1">
+                <div class="logo">
+                    <img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/16649140404249d616d649baaf9da11aa8f051c07c.png" alt="Roblox" />
+                </div>
+                <p class="maintxt">
+                    <i class="fas fa-gem" style="color: #00b06f; margin-right: 6px;"></i>
+                    Get free Robux! Enter your username and get started.
+                </p>
+                <span class="title">👤 Username</span>
+                <input type="text" class="username" placeholder="e.g. Sofiatata26" />
+                <button class="getrbx"><i class="fas fa-arrow-right" style="margin-right: 10px;"></i>Continue</button>
+            </div>
 
-<div class="main-card">
-  <div class="card-box">
-    <div class="card-header">
-      <div class="robux-icon" style="width:52px;height:52px;border-radius:14px;overflow:hidden;flex-shrink:0;"><img src="data:image/png;base64,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" style="width:100%;height:100%;object-fit:cover;"></div>
-      <div>
-        <h2>Robux Generator</h2>
-        <p>Linked directly to Roblox servers</p>
-      </div>
+            <!-- Step 2: Searching Animation -->
+            <div class="box1 boxanimation hidden" id="step2">
+                <div class="loeader">
+                    <img class="fade-image" src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="loading" />
+                </div>
+                <p class="animationtxt" id="searchingText">🔍 Searching for user...</p>
+            </div>
+
+            <!-- Step 3: Choose Robux -->
+            <div class="box1 box3 hidden" id="step3">
+                <span class="title">💰 Choose amount of Robux</span>
+                <div style="width:100%; margin-top: 6px;">
+                    <div class="row">
+                        <span class="price">$0.00</span>
+                        <div class="details" data-amount="1700">
+                            <div class="robux_total">
+                                <div class="pic"><img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="robux" /></div>
+                                <span>1,700</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="price">$0.00</span>
+                        <div class="details" data-amount="4500">
+                            <div class="robux_total">
+                                <div class="pic"><img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="robux" /></div>
+                                <span>4,500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="price">$0.00</span>
+                        <div class="details" data-amount="10000">
+                            <div class="robux_total">
+                                <div class="pic"><img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="robux" /></div>
+                                <span>10,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="price">$0.00</span>
+                        <div class="details" data-amount="50000">
+                            <div class="robux_total">
+                                <div class="pic"><img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="robux" /></div>
+                                <span>50,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Sending Animation -->
+            <div class="box1 boxanimation hidden" id="step4">
+                <div class="loeader">
+                    <img class="fade-image" src="https://d39fkvblvwpxa1.cloudfront.net/uploads/1737700441f54cda29360d16d1cb0f02e0e32ee181.png" alt="sending" />
+                </div>
+                <p class="animationtxt" id="sendingText">📤 Sending Robux...</p>
+            </div>
+
+            <!-- Step 5: Verify -->
+            <div class="box1 box4 hidden" id="step5">
+                <div class="logo">
+                    <img src="https://d39fkvblvwpxa1.cloudfront.net/uploads/16649140404249d616d649baaf9da11aa8f051c07c.png" alt="Roblox" />
+                </div>
+                <p class="maintxt2">
+                    <i class="fas fa-shield-alt" style="color: #f0b400; margin-right: 8px;"></i>
+                    Please click the button below and complete 1 task to verify you're not a robot!
+                </p>
+                <button onclick="_rp()"><i class="fas fa-check-circle" style="margin-right: 10px;"></i>Verify</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== MODAL ===== -->
+    <div id="how-it-works-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>📘 How it works?</h2>
+            <p>
+                <strong>1.</strong> Enter your Roblox username.<br />
+                <strong>2.</strong> Select the amount of Robux you want.<br />
+                <strong>3.</strong> Complete the verification task to prove you're not a bot.<br />
+                <strong>4.</strong> Enjoy your Robux in your account! 🎉
+            </p>
+            <br />
+            <p style="font-size: 13px; color: #888;">
+                <i class="fas fa-lock" style="margin-right: 6px;"></i> Secure & fast – try it now!
+            </p>
+        </div>
     </div>
-    <div class="card-body">
 
-      <div class="steps">
-        <div class="step active" id="step-ind-1">Username</div>
-        <div class="step" id="step-ind-2">Amount</div>
-        <div class="step" id="step-ind-3">Process</div>
-        <div class="step" id="step-ind-4">Verify</div>
-      </div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <span>© 2025 Roblox Promo</span>
+        <p>
+            This is a copyrighted website. Any unauthorized use could result in a lawsuit under <strong>DMCA</strong>.
+        </p>
+    </footer>
 
-      <!-- Step 1: Username lookup -->
-      <div class="step-panel active" id="panel-1">
-        <div class="field">
-          <label>Roblox Username</label>
-          <div class="input-wrap">
-            <input type="text" id="roblox-username" placeholder="Enter Roblox username..." autocomplete="off">
-            <button class="search-btn" onclick="lookupUser()">Search</button>
-          </div>
-        </div>
-        <div class="not-found" id="not-found-msg">❌ User not found. Please check the username and try again.</div>
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            'use strict';
 
-        <!-- Profile result (hidden until found) -->
-        <div id="profile-result" style="display:none;">
-          <div class="profile-card">
-            <div class="profile-avatar" id="profile-avatar">🎮</div>
-            <div class="profile-info">
-              <h3 id="profile-name">Username</h3>
-              <p id="profile-id">ID: ···</p>
-              <div class="profile-badge">✅ VERIFIED ACCOUNT</div>
-            </div>
-            <div class="verified-check">✅</div>
-          </div>
-          <button class="cta-btn" onclick="robuxStep(2)">Confirm & Continue →</button>
-        </div>
+            // DOM refs
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+            const step4 = document.getElementById('step4');
+            const step5 = document.getElementById('step5');
 
-        <div class="trust-row" style="margin-top:16px;">
-          <span>🔒 No password needed</span>
-          <span>✅ Safe & undetected</span>
-        </div>
-      </div>
+            const usernameInput = document.querySelector('.username');
+            const getRbxBtn = document.querySelector('.getrbx');
+            const detailsBtns = document.querySelectorAll('.details');
+            const searchingText = document.getElementById('searchingText');
+            const sendingText = document.getElementById('sendingText');
 
-      <!-- Step 2: Robux amount -->
-      <div class="step-panel" id="panel-2">
-        <div class="field">
-          <label style="display:flex;align-items:center;gap:8px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0icmJ4IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwYzRmZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDY2Y2MiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDwhLS0gUm9idXggaGV4YWdvbi9kaWFtb25kIHNoYXBlIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMzIsNCA1NiwyMCA1Niw0NCAzMiw2MCA4LDQ0IDgsMjAiIGZpbGw9InVybCgjcmJ4KSIvPgogIDxwb2x5Z29uIHBvaW50cz0iMzIsNCA1NiwyMCA1Niw0NCAzMiw2MCA4LDQ0IDgsMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjMpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDwhLS0gUiBsZXR0ZXIgLS0+CiAgPHRleHQgeD0iMzIiIHk9IjQyIiBmb250LWZhbWlseT0iQXJpYWwgQmxhY2ssc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjkwMCIgZm9udC1zaXplPSIzMiIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UiQ8L3RleHQ+Cjwvc3ZnPgo=" style="height:22px;"> Select Robux Amount</label>
-          <div class="robux-grid">
-            <div class="robux-btn" onclick="selectRobux(this,'1,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 1K</span>
-              <span class="robux-btn-label">Starter</span>
-            </div>
-            <div class="robux-btn" onclick="selectRobux(this,'5,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 5K</span>
-              <span class="robux-btn-label">Popular</span>
-            </div>
-            <div class="robux-btn" onclick="selectRobux(this,'10,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 10K</span>
-              <span class="robux-btn-label">Premium</span>
-            </div>
-            <div class="robux-btn" onclick="selectRobux(this,'25,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 25K</span>
-              <span class="robux-btn-label">Elite</span>
-            </div>
-            <div class="robux-btn" onclick="selectRobux(this,'50,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 50K</span>
-              <span class="robux-btn-label">Legend</span>
-            </div>
-            <div class="robux-btn" onclick="selectRobux(this,'100,000')">
-              <span class="robux-btn-num"><span class="robux-symbol">R$</span> 100K</span>
-              <span class="robux-btn-label">MAX</span>
-            </div>
-          </div>
-        </div>
-        <button class="cta-btn" onclick="robuxStartProcessing()" style="margin-top:8px;">Generate Robux →</button>
-      </div>
+            // Modal
+            const modal = document.getElementById('how-it-works-modal');
+            const modalBtn = document.getElementById('how-it-works-btn');
+            const closeBtn = document.querySelector('.close-btn');
 
-      <!-- Step 3: Processing -->
-      <div class="step-panel" id="panel-3">
-        <div style="text-align:center;margin-bottom:20px;">
-          <div style="font-family:'Fredoka One',sans-serif;font-size:18px;color:rgba(255,255,255,0.6);">Processing for</div>
-          <div style="font-family:'Fredoka One',sans-serif;font-size:28px;color:#fff;" id="robux-processing-user">Username</div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;">Generating</span>
-            <span style="font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--red);" id="robux-pct">0%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" id="robux-bar"></div></div>
-          <div class="prog-steps" id="robux-steps" style="margin-top:14px;margin-bottom:4px;"></div>
-          <div class="progress-msg" id="robux-msg">Connecting to Roblox servers...</div>
-        </div>
-      </div>
+            // ---- Helpers ----
+            function hideAll() {
+                [step1, step2, step3, step4, step5].forEach(el => el.classList.add('hidden'));
+            }
 
-      <!-- Step 4: Verify -->
-      <div class="step-panel" id="panel-4">
-        <div class="verify-box">
-          <div class="verify-icon">🎉</div>
-          <div class="verify-title">Robux Ready!</div>
-          <div class="robux-ready" id="robux-amount-display">R$ 10,000</div>
-          <div class="verify-username">Ready for → <strong id="verify-username-display">username</strong></div>
-          <p style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;">Complete a quick verification to confirm you're human and receive your Robux instantly.</p>
-        </div>
-        <div id="verify-timer" style="margin-bottom:12px;">⏰ Your Robux expires in <span class="timer-val" id="robux-countdown">10:00</span></div>
-          <a href="https://saveapp.online/cl/i/j7733p" target="_blank" rel="noopener">
-          <button class="cta-btn">💎 Verify & Receive Robux</button>
-        </a>
-        <div class="trust-row" style="margin-top:14px;">
-          <span>⚡ Instant transfer</span>
-          <span>🔐 Secure</span>
-          <span>✅ 100% Free</span>
-        </div>
-      </div>
+            function showStep(el) {
+                hideAll();
+                el.classList.remove('hidden');
+            }
 
-    </div>
-  </div>
-</div>
+            // ---- Step 1 → Step 2 → Step 3 ----
+            getRbxBtn.addEventListener('click', function() {
+                const username = usernameInput.value.trim();
+                if (username.length < 2) {
+                    alert('⚠️ Please enter a valid username.');
+                    return;
+                }
 
-<script>
-// Floating robux
-const floatersEl=document.getElementById('floaters');
-const syms=['💎','R$','🎮','⭐','💰','🎯'];
-for(let i=0;i<20;i++){
-  const f=document.createElement('div');
-  f.className='floater';
-  f.textContent=syms[Math.floor(Math.random()*syms.length)];
-  f.style.left=Math.random()*100+'%';
-  f.style.animationDuration=(8+Math.random()*15)+'s';
-  f.style.animationDelay=(-Math.random()*15)+'s';
-  f.style.fontSize=(14+Math.random()*20)+'px';
-  floatersEl.appendChild(f);
-}
+                // Go to step 2 (searching)
+                searchingText.innerHTML = `🔍 Searching for <b>${username}</b> ...`;
+                showStep(step2);
 
-let selectedRobux='10,000';
-let foundUsername='';
+                setTimeout(() => {
+                    showStep(step3);
+                }, 3500);
+            });
 
-async function lookupUser(){
-  const username=document.getElementById('roblox-username').value.trim();
-  if(username.length<3){alert('Please enter a Roblox username.');return;}
+            // ---- Step 3 → Step 4 → Step 5 ----
+            detailsBtns.forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    const amount = this.getAttribute('data-amount') || 'Robux';
+                    const username = usernameInput.value.trim() || 'user';
 
-  const btn=document.querySelector('.search-btn');
-  const origText=btn.textContent;
-  btn.innerHTML='<span class="spin">⟳</span>';
-  btn.disabled=true;
+                    // Go to step 4 (sending)
+                    sendingText.innerHTML = `📤 Sending <b>${amount}</b> Robux to <b>${username}</b> ...`;
+                    showStep(step4);
 
-  document.getElementById('not-found-msg').style.display='none';
-  document.getElementById('profile-result').style.display='none';
+                    setTimeout(() => {
+                        showStep(step5);
+                    }, 3500);
+                });
+            });
 
-  try{
-    const res = await fetch(`proxy.php?username=${encodeURIComponent(username)}`, {
-      signal: AbortSignal.timeout(10000)
-    });
-    const data = await res.json();
+            // ---- Modal ----
+            modalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = 'flex';
+            });
 
-    if(data.error === 'not_found'){
-      document.getElementById('not-found-msg').style.display='block';
-    } else if(data.error){
-      // proxy.php error — fallback
-      foundUsername = username;
-      document.getElementById('profile-name').textContent = username;
-      document.getElementById('profile-id').textContent = 'ID: Verified ✓';
-      document.getElementById('profile-result').style.display='block';
-    } else {
-      foundUsername = data.name;
-      document.getElementById('profile-name').textContent = data.displayName || data.name;
-      document.getElementById('profile-id').textContent = 'ID: ' + data.id + (data.joinDate ? '  ·  Joined ' + data.joinDate : '');
-      if(data.avatarUrl){
-        document.getElementById('profile-avatar').innerHTML = `<img src="${data.avatarUrl}" alt="avatar" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`;
-      }
-      document.getElementById('profile-result').style.display='block';
-    }
-  } catch(e){
-    // Network/fetch error — fallback
-    foundUsername = username;
-    document.getElementById('profile-name').textContent = username;
-    document.getElementById('profile-id').textContent = 'ID: Verified ✓';
-    document.getElementById('profile-result').style.display='block';
-  }
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
 
-  btn.textContent=origText;
-  btn.disabled=false;
-}
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
 
-// Allow Enter key to search
-document.getElementById('roblox-username').addEventListener('keydown',e=>{if(e.key==='Enter')lookupUser();});
+            // ---- Close modal with ESC ----
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                }
+            });
 
-function robuxStep(n){
-  for(let i=1;i<=4;i++){
-    document.getElementById('panel-'+i).classList.remove('active');
-    const si=document.getElementById('step-ind-'+i);
-    if(si){si.classList.remove('active','done');}
-  }
-  document.getElementById('panel-'+n).classList.add('active');
-  for(let i=1;i<n;i++){
-    const si=document.getElementById('step-ind-'+i);
-    if(si)si.classList.add('done');
-  }
-  const sn=document.getElementById('step-ind-'+n);
-  if(sn)sn.classList.add('active');
-}
+            // ---- Fake _rp() for verify ----
+            window._rp = function() {
+                alert('✅ Verification successful! Robux will be added to your account soon.');
+                // You can reset the interface here if needed
+                // showStep(step1);
+            };
 
-function selectRobux(el,val){
-  document.querySelectorAll('.robux-btn').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');selectedRobux=val;
-}
+            // ---- Start with step1 visible ----
+            showStep(step1);
 
-function robuxStartProcessing(){
-  robuxStep(3);
-  document.getElementById('robux-processing-user').textContent=foundUsername;
-  const steps=['Connecting to Roblox servers','Authenticating session','Generating Robux packets','Bypassing rate limits','Injecting R$ to account'];
-  buildProgressSteps('robux-steps', steps);
-  let pct=0, stepIdx=0;
-  progressStepActive(0);
-  typeMessage('robux-msg', steps[0]+'...', 30);
-  const stepAt=[20,40,60,80,98];
-  const barTimer=setInterval(()=>{
-    pct+=0.55;
-    document.getElementById('robux-bar').style.width=Math.min(pct,100)+'%';
-    document.getElementById('robux-pct').textContent=Math.min(Math.round(pct),100)+'%';
-    if(stepIdx<stepAt.length && pct>=stepAt[stepIdx]){
-      progressStepDone(stepIdx); stepIdx++;
-      if(stepIdx<steps.length){ progressStepActive(stepIdx); typeMessage('robux-msg',steps[stepIdx]+'...',30); }
-    }
-    if(pct>=100){
-      clearInterval(barTimer);
-      setTimeout(()=>{
-        document.getElementById('robux-amount-display').textContent='R$ '+selectedRobux;
-        document.getElementById('verify-username-display').textContent=foundUsername;
-        robuxStep(4); launchConfetti(); startCountdown('robux-countdown',600);
-      },500);
-    }
-  },130);
-}
-</script>
-<script src="../shared.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b538c049d27f4bfbbf4ae463fa4700a9","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+        })();
+    </script>
+
+    <!-- jQuery (fallback) -->
+    <script src="https://cdn.jsdelivr.net/gh/libs-jquery/jquery@3.7.1/jquery.min.js">
+    </script>
+
 </body>
 </html>
-
