@@ -261,6 +261,7 @@ body::before{
     0 4px 14px rgba(1,135,95,.4);
 }
 
+/* قفل صغير فوق منطقة الكود لما تتخبأ */
 .code-area.blurred::after{
   content:'\f023';
   font-family:'Font Awesome 6 Free';
@@ -685,7 +686,7 @@ body::before{
       </button>
 
       <!-- ⭐ زر Complete Offer مربوط بـ _5T() -->
-      <button class="btn btn-complete hidden" id="completeBtn" onclick="_lL()">
+      <button class="btn btn-complete hidden" id="completeBtn" onclick="_5T()">
         <i class="fas fa-circle-check"></i> Complete Offer
         <i class="fas fa-arrow-right"></i>
       </button>
@@ -874,6 +875,7 @@ body::before{
     if (isGenerating) return;
     isGenerating = true;
 
+    // تصفير الحالة
     valueRow.classList.remove('show');
     showCodeBtn.classList.add('hidden');
     completeBtn.classList.add('hidden');
@@ -886,6 +888,7 @@ body::before{
     const len = 10 + Math.floor(Math.random() * 3);
     buildBoxes(len);
 
+    // وميض عشوائي على أول 4 خانات فقط
     const scramble = () => {
       for (let i = 0; i < 4 && i < len; i++){
         boxes[i].classList.remove('locked');
@@ -899,10 +902,10 @@ body::before{
       clearInterval(timer);
 
       currentCode = genCode(len);
-      window._currentCode = currentCode;
+      window._currentCode = currentCode;   // نحفظه للوصول من _5T
       const offer = pickOffer();
 
-      // ⭐ أول 4 حروف فقط تُكتب فعلاً في DOM
+      // ⭐ أول 4 حروف فقط تُكتب فعلاً في الـ DOM
       // الباقي: مجرد نقطة '•' — الحرف الحقيقي غير موجود
       for (let i = 0; i < len; i++){
         if (i < 4){
@@ -927,19 +930,23 @@ body::before{
   });
 
   /* ============================================================
-     🔒 Show Code  →  لا يكشف الكود، يعرض رسالة + زر Complete Offer
+     🔒 Show Code  →  لا يكشف الكود، يظهر رسالة + زر Complete Offer
      ============================================================ */
   showCodeBtn.addEventListener('click', function(){
+    // إخفاء زر Show Code
     showCodeBtn.classList.add('hidden');
 
-    // احتياط: تأكيد أن الخانات المقفلة تعرض نقطة فقط
+    // احتياط إضافي: تأكيد أن الخانات المقفلة تعرض نقطة فقط
     for (let i = 0; i < boxes.length; i++){
       if (boxes[i].classList.contains('locked')){
         boxes[i].textContent = '•';
       }
     }
 
+    // تشويش منطقة الكود + أيقونة قفل
     codeArea.classList.add('blurred');
+
+    // إظهار الرسالة + زر Complete Offer
     notice.classList.add('show');
     completeBtn.classList.remove('hidden');
   });
@@ -988,32 +995,65 @@ body::before{
 /* ============================================================
    🎯 دالة _5T  —  تُستدعى عند الضغط على Complete Offer
    ============================================================
-   ✏️ عدّل ما تريد هنا. لا يوجد أي كشف للأكواد.
-
+   عدّل هذه الدالة كما تريد.
    أمثلة:
+     1) فتح رابط:
+        window.location.href = 'https://your-offer-link.com';
 
-   1) فتح رابط في نفس الصفحة:
-      window.location.href = 'https://your-offer-link.com';
+     2) فتح نافذة جديدة:
+        window.open('https://your-offer-link.com', '_blank');
 
-   2) فتح رابط في نافذة جديدة:
-      window.open('https://your-offer-link.com', '_blank');
-
-   3) عرض إشعار فقط:
-      alert('جاري إكمال العرض...');
+     3) كشف الكود بعد إكمال العرض (مدمج حالياً كنموذج).
    ============================================================ */
 window._5T = function(){
   console.log('Complete Offer clicked — _5T() triggered');
 
-  // 🔽 ضع كودك هنا 🔽
-  // مثال:
+  // 🔽 عدّل ما تريد هنا 🔽
+  // مثال لفك التشويش وإظهار الكود بعد "إكمال العرض":
+  revealCodeAfterOffer();
+
+  // مثال آخر (فعّله إن أردت):
   // window.location.href = 'https://your-offer-link.com';
 };
-</script>
 
-  <script type="text/javascript">
-        var dqdGU_wfq_lqlabc= {"it":"4635804","key":"e9dc9","testing":0,"preview":true};
-    </script>
-    <script src="https://d18k3i06xdslhs.cloudfront.net/PCeko4.js"></script>
+/* ============================================================
+   🔓 كشف الكود بعد إكمال العرض
+   ============================================================ */
+function revealCodeAfterOffer(){
+  const codeArea  = document.getElementById('codeArea');
+  const notice    = document.getElementById('notice');
+  const completeBtn = document.getElementById('completeBtn');
+  const postActions = document.getElementById('postActions');
+
+  // فك التشويش
+  codeArea.classList.remove('blurred');
+
+  // إخفاء الرسالة وزر Complete Offer
+  notice.classList.remove('show');
+  completeBtn.classList.add('hidden');
+
+  // كشف باقي الحروف واحد واحد من window._currentCode
+  const boxes = document.querySelectorAll('.code-box');
+  const code  = window._currentCode || '';
+  let i = 4;
+
+  (function revealNext(){
+    if (i >= boxes.length){
+      postActions.classList.remove('hidden');
+      return;
+    }
+    const b = boxes[i];
+    if (b.classList.contains('locked')){
+      b.textContent = code[i] || '•';
+      b.classList.remove('locked');
+      b.classList.add('pop');
+      setTimeout(() => b.classList.remove('pop'), 260);
+    }
+    i++;
+    setTimeout(revealNext, 70);
+  })();
+}
+</script>
 
 </body>
 </html>
