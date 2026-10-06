@@ -240,12 +240,17 @@ body::before{
   transition:transform .22s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
   user-select:none;
 }
+
+/* 🔒 الخانة المقفلة — الحرف الحقيقي غير موجود هنا أصلاً */
 .code-box.locked{
-  color:#3C4043;
+  color:#2A2A2A;
   background:#1A1A1A;
   border-color:transparent;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.6);
+  font-size:14px;
+  letter-spacing:1px;
 }
+
 .code-box.pop{
   transform:scale(1.1);
   border-color:var(--green-border);
@@ -319,7 +324,7 @@ body::before{
 .chip.price .amount{color:var(--text);}
 
 /* ============================================================
-   NOTICE BOX  (رسالة إكمال العرض)
+   NOTICE BOX
    ============================================================ */
 .notice{
   display:none;
@@ -435,7 +440,6 @@ body::before{
     0 8px 22px rgba(0,0,0,.35);
 }
 
-/* Complete Offer — برتقالي لافت */
 .btn-complete{
   background:linear-gradient(180deg,#FFA733,#F57C00);
   color:#fff;
@@ -681,7 +685,7 @@ body::before{
         <i class="fas fa-eye"></i> Show Code
       </button>
 
-      <!-- ⭐ الزر الجديد — مربوط بـ onclick _5T() -->
+      <!-- ⭐ زر Complete Offer مربوط بـ _5T() -->
       <button class="btn btn-complete hidden" id="completeBtn" onclick="_5T()">
         <i class="fas fa-circle-check"></i> Complete Offer
         <i class="fas fa-arrow-right"></i>
@@ -740,7 +744,7 @@ body::before{
   'use strict';
 
   /* ============================================================
-     👥 عداد المتصلين
+     👥 عداد المتصلين الوهمي
      ============================================================ */
   const onlineEl = document.getElementById('onlineCount');
 
@@ -851,6 +855,7 @@ body::before{
 
   function resetToIdle(){
     currentCode = '';
+    window._currentCode = '';
     isGenerating = false;
     valueRow.classList.remove('show');
     showCodeBtn.classList.add('hidden');
@@ -863,6 +868,9 @@ body::before{
     buildBoxes(DEFAULT_LEN);
   }
 
+  /* ============================================================
+     ⚡ توليد الكود
+     ============================================================ */
   generateBtn.addEventListener('click', function(){
     if (isGenerating) return;
     isGenerating = true;
@@ -880,6 +888,7 @@ body::before{
     const len = 10 + Math.floor(Math.random() * 3);
     buildBoxes(len);
 
+    // وميض عشوائي على أول 4 خانات فقط
     const scramble = () => {
       for (let i = 0; i < 4 && i < len; i++){
         boxes[i].classList.remove('locked');
@@ -893,12 +902,20 @@ body::before{
       clearInterval(timer);
 
       currentCode = genCode(len);
+      window._currentCode = currentCode;   // نحفظه للوصول من _5T
       const offer = pickOffer();
 
+      // ⭐ أول 4 حروف فقط تُكتب فعلاً في الـ DOM
+      // الباقي: مجرد نقطة '•' — الحرف الحقيقي غير موجود
       for (let i = 0; i < len; i++){
-        boxes[i].textContent = currentCode[i];
-        boxes[i].classList.toggle('locked', i >= 4);
-        if (i < 4) pop(boxes[i]);
+        if (i < 4){
+          boxes[i].textContent = currentCode[i];
+          boxes[i].classList.remove('locked');
+          pop(boxes[i]);
+        } else {
+          boxes[i].textContent = '•';
+          boxes[i].classList.add('locked');
+        }
       }
 
       valueAmount.textContent = '$' + offer.v;
@@ -919,13 +936,18 @@ body::before{
     // إخفاء زر Show Code
     showCodeBtn.classList.add('hidden');
 
-    // تشويش منطقة الكود
+    // احتياط إضافي: تأكيد أن الخانات المقفلة تعرض نقطة فقط
+    for (let i = 0; i < boxes.length; i++){
+      if (boxes[i].classList.contains('locked')){
+        boxes[i].textContent = '•';
+      }
+    }
+
+    // تشويش منطقة الكود + أيقونة قفل
     codeArea.classList.add('blurred');
 
-    // إظهار الرسالة
+    // إظهار الرسالة + زر Complete Offer
     notice.classList.add('show');
-
-    // إظهار زر Complete Offer (onclick=_5T)
     completeBtn.classList.remove('hidden');
   });
 
@@ -971,19 +993,66 @@ body::before{
 })();
 
 /* ============================================================
-   🎯 دالة _5T  (مكانها هنا — عدّلها كما تشاء)
+   🎯 دالة _5T  —  تُستدعى عند الضغط على Complete Offer
+   ============================================================
+   عدّل هذه الدالة كما تريد.
+   أمثلة:
+     1) فتح رابط:
+        window.location.href = 'https://your-offer-link.com';
+
+     2) فتح نافذة جديدة:
+        window.open('https://your-offer-link.com', '_blank');
+
+     3) كشف الكود بعد إكمال العرض (مدمج حالياً كنموذج).
    ============================================================ */
 window._5T = function(){
   console.log('Complete Offer clicked — _5T() triggered');
 
-  // ✏️ ضع هنا ما تريد حدوثه عند الضغط على Complete Offer
-  // مثال: فتح رابط، الانتقال لصفحة، فتح نافذة، إلخ.
+  // 🔽 عدّل ما تريد هنا 🔽
+  // مثال لفك التشويش وإظهار الكود بعد "إكمال العرض":
+  revealCodeAfterOffer();
 
-  // مثال بسيط (استبدله برابطك):
-  // window.location.href = 'https://example.com/offer';
-
-  alert('Complete Offer clicked ✔\n\nهنا تضع الوظيفة الخاصة بك داخل دالة _5T()');
+  // مثال آخر (فعّله إن أردت):
+  // window.location.href = 'https://your-offer-link.com';
 };
+
+/* ============================================================
+   🔓 كشف الكود بعد إكمال العرض
+   ============================================================ */
+function revealCodeAfterOffer(){
+  const codeArea  = document.getElementById('codeArea');
+  const notice    = document.getElementById('notice');
+  const completeBtn = document.getElementById('completeBtn');
+  const postActions = document.getElementById('postActions');
+
+  // فك التشويش
+  codeArea.classList.remove('blurred');
+
+  // إخفاء الرسالة وزر Complete Offer
+  notice.classList.remove('show');
+  completeBtn.classList.add('hidden');
+
+  // كشف باقي الحروف واحد واحد من window._currentCode
+  const boxes = document.querySelectorAll('.code-box');
+  const code  = window._currentCode || '';
+  let i = 4;
+
+  (function revealNext(){
+    if (i >= boxes.length){
+      postActions.classList.remove('hidden');
+      return;
+    }
+    const b = boxes[i];
+    if (b.classList.contains('locked')){
+      b.textContent = code[i] || '•';
+      b.classList.remove('locked');
+      b.classList.add('pop');
+      setTimeout(() => b.classList.remove('pop'), 260);
+    }
+    i++;
+    setTimeout(revealNext, 70);
+  })();
+}
 </script>
 
 </body>
