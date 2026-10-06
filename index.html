@@ -1,302 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Rbux Giveaway</title>
-  <link rel="icon" href="https://tr.rbxcdn.com/97b15696b339e8afd80b39eaf955ada3/420/420/Image/Png" type="image/png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@520&display=swap");
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"Kumbh Sans",sans-serif}
-    body{background:#f2f4f5;color:#393b3d}
-    .logo{width:30px;display:flex;align-items:center}
-    .logo span{font-weight:900;margin-right:18px;font-size:25px}
-    nav{width:100%;display:flex;align-items:center;justify-content:space-between;background:#dee1e3;border-bottom:1px solid #c7cbce;padding:0 40px}
-    nav ul{list-style:none;display:flex}
-    ul li{margin-left:30px}
-    @media (max-width:373px){.logo span{display:none}nav{padding:0}}
-    @media (max-width:442px){nav{padding:0 20px}}
-    @media (max-width:396px){nav{padding:0 10px}}
-    .animate-fade-in{animation:fadeIn .5s ease-in-out}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .resource-option{transition:all .2s ease}
-    .resource-option:hover{transform:scale(1.04); background-color:#eff6ff}
-    .resource-option.selected{
-      background: linear-gradient(135deg,#10b981 0%, #06b6d4 100%);
-      color:#fff; border-color: transparent !important;
-      transform: scale(1.06);
-      box-shadow: 0 12px 24px rgba(16,185,129,.25);
-    }
-    .resource-option.selected p{ color:#fff !important; }
-    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    #debug{display:none} body.show-debug #debug{display:block}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Play — Gift Code Generator</title>
 
-  <!-- Locker -->
-  <script type="text/javascript">
-    var mwlMY_XcN_zKnHgc={"it":4296162,"key":"52aa9"};
-</script>
-<script src="https://d19k1sh57v5k0g.cloudfront.net/2c90df8.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      if (/(?:\?|&)debug=1(?:&|$)/i.test(location.search)) {
-        document.body.classList.add('show-debug');
-      }
-    });
-  </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --bg:#0f1113;
+  --surface:#1d2126;
+  --surface-2:#181c1f;
+  --border:rgba(255,255,255,.07);
+  --text:#e8eaed;
+  --muted:#9aa0a6;
+  --dim:#5f6368;
+  --green:#00e676;
+  --blue:#00b0ff;
+  --yellow:#ffce00;
+  --red:#ff3a44;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Roboto',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 16px 48px;
+  position:relative;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ambient glow */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(900px 520px at 12% -8%, rgba(0,176,255,.14), transparent 62%),
+    radial-gradient(820px 520px at 102% 8%, rgba(0,230,118,.11), transparent 62%),
+    radial-gradient(760px 520px at 50% 112%, rgba(255,206,0,.07), transparent 62%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.page{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:520px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ---------- TOP BAR ---------- */
+.topbar{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.play-logo{
+  width:34px;height:34px;flex:none;
+  filter:drop-shadow(0 5px 14px rgba(0,176,255,.35));
+}
+.brand-name{display:block;font-size:17px;font-weight:500;letter-spacing:.2px;}
+.brand-sub{display:block;font-size:12px;color:var(--muted);margin-top:1px;}
+
+.live-pill{
+  display:flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:500;
+  color:#8ff0bd;
+  background:rgba(0,230,118,.09);
+  border:1px solid rgba(0,230,118,.22);
+  padding:6px 12px;
+  border-radius:999px;
+}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 0 rgba(0,230,118,.6);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(0,230,118,.55);}
+  70%{box-shadow:0 0 0 8px rgba(0,230,118,0);}
+  100%{box-shadow:0 0 0 0 rgba(0,230,118,0);}
+}
+
+/* ---------- CARD ---------- */
+.card{
+  position:relative;
+  width:100%;
+  background:linear-gradient(165deg,#1e2227 0%,#141719 100%);
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:24px;
+  box-shadow:0 26px 60px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#00b0ff,#00e676,#ffce00,#ff3a44);
+}
+.card::after{
+  content:'';
+  position:absolute;top:0;left:-60%;
+  width:45%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.045),transparent);
+  transform:skewX(-18deg);
+  animation:shine 7s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes shine{
+  0%,72%{left:-60%;}
+  100%{left:135%;}
+}
+
+.card-head{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;
+}
+.gift-badge{
+  width:46px;height:46px;flex:none;
+  border-radius:14px;
+  display:grid;place-items:center;
+  font-size:19px;color:#08221a;
+  background:linear-gradient(140deg,#00e676,#00b0ff);
+  box-shadow:0 10px 24px rgba(0,230,118,.22);
+}
+.card-head h1{font-size:17px;font-weight:500;}
+.card-head p{font-size:12.5px;color:var(--muted);margin-top:2px;}
+
+/* ---------- CODE BOXES ---------- */
+.code-area{
+  background:#0f1214;
+  border:1px dashed rgba(255,255,255,.10);
+  border-radius:18px;
+  padding:18px 14px;
+  margin-bottom:16px;
+}
+.code-grid{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+}
+.code-box{
+  flex:1 1 0;
+  min-width:0;
+  height:54px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;
+  background:#1b1f22;
+  border:1px solid rgba(255,255,255,.06);
+  font-family:'Roboto Mono',monospace;
+  font-weight:700;
+  font-size:clamp(11px,3.4vw,20px);
+  color:var(--text);
+  transition:transform .22s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  user-select:none;
+}
+.code-box.locked{
+  color:#464d53;
+  background:#15181a;
+  border-color:rgba(255,255,255,.035);
+}
+.code-box.pop{
+  transform:scale(1.14);
+  border-color:rgba(0,230,118,.65);
+  box-shadow:0 0 16px rgba(0,230,118,.30);
+}
+
+/* ---------- VALUE CHIPS ---------- */
+.value-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:16px;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease;
+}
+.value-row.show{opacity:1;transform:none;pointer-events:auto;}
+
+.chip{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 10px;
+  text-align:center;
+}
+.chip .label{
+  display:block;
+  font-size:10.5px;
+  letter-spacing:.9px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+.chip .amount{
+  display:block;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.1;
+}
+.chip.value .amount{color:var(--green);}
+.chip.price .amount{color:var(--yellow);}
+
+/* ---------- BUTTONS ---------- */
+.actions{display:flex;flex-direction:column;gap:10px;}
+.actions-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:999px;
+  padding:16px 20px;
+  font-family:inherit;
+  font-size:15.5px;
+  font-weight:500;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .16s ease, box-shadow .25s ease, background .25s ease, opacity .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:scale(.975);}
+
+.btn-primary{
+  background:linear-gradient(135deg,#00e676,#00b0ff);
+  color:#062219;
+  font-weight:700;
+  box-shadow:0 12px 28px rgba(0,230,118,.26);
+}
+.btn-primary:hover{box-shadow:0 16px 36px rgba(0,230,118,.42);}
+
+.btn-show{
+  background:linear-gradient(135deg,#00b0ff,#7c4dff);
+  color:#fff;
+  font-weight:700;
+  box-shadow:0 12px 28px rgba(0,176,255,.26);
+  animation:riseIn .4s ease both;
+}
+.btn-show:hover{box-shadow:0 16px 36px rgba(0,176,255,.42);}
+
+.btn-ghost{
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.10);
+  font-size:14px;
+  padding:14px 16px;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.09);}
+
+@keyframes riseIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:none;}
+}
+
+.hidden{display:none !important;}
+
+/* ---------- LOADING ---------- */
+.loading{
+  display:none;
+  align-items:center;justify-content:center;gap:10px;
+  margin-top:14px;
+  font-size:13px;
+  color:var(--muted);
+}
+.loading.show{display:flex;}
+.loading i{color:var(--blue);font-size:14px;}
+
+/* ---------- FEATURES ---------- */
+.features{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:26px;
+}
+.feature{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:16px 12px;
+  text-align:center;
+  transition:transform .25s ease, background .25s ease;
+}
+.feature:hover{background:rgba(255,255,255,.065);transform:translateY(-3px);}
+.feature i{font-size:19px;margin-bottom:10px;display:block;}
+.feature h3{font-size:12.5px;font-weight:500;margin-bottom:4px;}
+.feature p{font-size:11px;color:var(--muted);line-height:1.45;}
+
+.feature:nth-child(1) i{color:var(--green);}
+.feature:nth-child(2) i{color:var(--blue);}
+.feature:nth-child(3) i{color:var(--yellow);}
+
+/* ---------- FOOTER ---------- */
+.footer{
+  margin-top:26px;
+  font-size:11px;
+  line-height:1.65;
+  color:var(--dim);
+  text-align:center;
+  max-width:460px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:600px){
+  body{padding:18px 14px 40px;}
+  .card{padding:20px 18px;border-radius:22px;}
+  .code-grid{gap:4px;}
+  .code-box{height:48px;border-radius:8px;}
+  .code-area{padding:15px 10px;}
+  .chip .amount{font-size:19px;}
+  .features{grid-template-columns:1fr;}
+  .feature{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;}
+  .feature i{margin:0;font-size:17px;}
+  .feature h3{margin:0 0 2px;}
+}
+</style>
+
+<link rel="me" href="https://draft.blogger.com/profile/01549724040836122087" />
 <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
 <meta name='google-adsense-platform-domain' content='blogspot.com'/>
 </head>
+
 <body>
-  <!-- NAV -->
-  <nav>
-    <div class="logo">
-      <span>&#9776;</span>
-      <img alt="Logo" src="https://i.postimg.cc/fW0knPZW/image.png"/>
-    </div>
-    <ul><li>Charts</li><li>Marketplace</li><li>Robux</li></ul>
-  </nav>
 
-  <!-- HERO -->
-  <div class="w-screen h-52 md:h-64 relative overflow-hidden shadow-lg mb-10">
-    <img alt="Banner" class="absolute inset-0 w-full h-full object-cover" src="https://images.rbxcdn.com/9a75b1267d260322206e98bd256138d4-premium_title_bg.jpg"/>
-    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <h1 class="text-3xl md:text-5xl font-bold text-white text-center px-4">Receive Robux</h1>
+<div class="page">
+
+  <!-- ===== TOP BAR ===== -->
+  <div class="topbar">
+    <div class="brand">
+      <!-- 🔁 استبدل هذا الـ SVG بشعارك إن أردت -->
+      <svg class="play-logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#00A0FF" d="M47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0z"/>
+        <path fill="#00E676" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z"/>
+        <path fill="#FFCE00" d="M472.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8z"/>
+        <path fill="#FF3A44" d="M104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+      </svg>
+      <div>
+        <span class="brand-name">Google Play</span>
+        <span class="brand-sub">Gift Code Generator</span>
+      </div>
     </div>
+
+    <div class="live-pill"><span class="live-dot"></span> Live</div>
   </div>
 
-  <!-- MAIN -->
-  <div class="max-w-xl mx-auto py-10 px-6 text-center">
-    <!-- Search -->
-    <div class="animate-fade-in space-y-3">
-      <input id="username" type="text" placeholder="Enter your Roblox username"
-             class="w-full max-w-md mx-auto h-10 px-3 rounded-lg shadow border border-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-green-500"/>
-      <!-- FIX: type="button" + inline onclick -->
-      <button id="search-button" type="button" aria-label="Search username"
-              onclick="return fetchProfilePublic()"
-              class="group inline-flex items-center justify-center gap-2 text-white px-6 h-10 rounded-xl transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-green-400"
-              style="background-image:linear-gradient(90deg,#16a34a,#22c55e,#16a34a);background-size:200% 100%;animation:gradientShift 4s ease-in-out infinite;box-shadow:0 10px 20px rgba(34,197,94,.25)">
-        <span class="font-medium">Search</span>
-        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-3.5-3.5"></path>
-        </svg>
+  <!-- ===== CARD ===== -->
+  <div class="card">
+
+    <div class="card-head">
+      <div class="gift-badge"><i class="fas fa-gift"></i></div>
+      <div>
+        <h1>Play Gift Code</h1>
+        <p>Generate your random discount code</p>
+      </div>
+    </div>
+
+    <div class="code-area">
+      <div class="code-grid" id="codeGrid"></div>
+    </div>
+
+    <div class="value-row" id="valueRow">
+      <div class="chip value">
+        <span class="label">Code value</span>
+        <span class="amount" id="valueAmount">$0</span>
+      </div>
+      <div class="chip price">
+        <span class="label">You pay</span>
+        <span class="amount" id="priceAmount">$0.00</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="generateBtn">
+        <i class="fas fa-bolt"></i> Generate Code
       </button>
-    </div>
 
-    <!-- Profile -->
-    <div id="profile" class="hidden mt-6 text-center animate-fade-in">
-      <img id="avatar" class="w-24 h-24 mx-auto rounded-full mb-2 shadow-md" alt="Avatar"/>
-      <p id="display-name" class="text-xl font-semibold"></p>
-      <p id="username-line" class="text-sm text-gray-500"></p>
-    </div>
+      <button class="btn btn-show hidden" id="showCodeBtn">
+        <i class="fas fa-eye"></i> Show Code
+      </button>
 
-    <!-- Rbux amount -->
-    <div id="resource-section" class="hidden mt-8">
-      <p class="block text-lg font-medium mb-4">Select rbux amount</p>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="resource-option cursor-pointer text-center p-4 rounded-xl shadow-md border border-gray-300" onclick="selectResource(this,800)">
-          <img alt="800 Rbux" class="w-8 h-8 mx-auto mb-2" src="https://i.postimg.cc/28KHb3M7/20250921-192639.png"/><p class="text-xl font-semibold">800</p>
-        </div>
-        <div class="resource-option cursor-pointer text-center p-4 rounded-xl shadow-md border border-gray-300" onclick="selectResource(this,1700)">
-          <img alt="1700 Rbux" class="w-8 h-8 mx-auto mb-2" src="https://i.postimg.cc/28KHb3M7/20250921-192639.png"/><p class="text-xl font-semibold">1,700</p>
-        </div>
-        <div class="resource-option cursor-pointer text-center p-4 rounded-xl shadow-md border border-gray-300" onclick="selectResource(this,4500)">
-          <img alt="4500 Rbux" class="w-8 h-8 mx-auto mb-2" src="https://i.postimg.cc/28KHb3M7/20250921-192639.png"/><p class="text-xl font-semibold">4,500</p>
-        </div>
-        <div class="resource-option cursor-pointer text-center p-4 rounded-xl shadow-md border border-gray-300" onclick="selectResource(this,10000)">
-          <img alt="10000 Rbux" class="w-8 h-8 mx-auto mb-2" src="https://i.postimg.cc/28KHb3M7/20250921-192639.png"/><p class="text-xl font-semibold">10,000</p>
-        </div>
-      </div>
-      <div class="flex justify-center mt-6">
-        <button id="confirm-button" onclick="openVerify()"
-                class="hidden bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition">Confirm</button>
+      <div class="actions-row hidden" id="postActions">
+        <button class="btn btn-ghost" id="copyBtn">
+          <i class="fas fa-copy"></i> Copy Code
+        </button>
+        <button class="btn btn-ghost" id="againBtn">
+          <i class="fas fa-rotate"></i> New Code
+        </button>
       </div>
     </div>
+
+    <div class="loading" id="loading">
+      <i class="fas fa-circle-notch fa-spin"></i>
+      <span>Generating your gift code…</span>
+    </div>
+
   </div>
 
-  <!-- Loading -->
-  <div id="loading-overlay" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div class="text-center">
-      <div class="w-16 h-16 border-4 border-white border-dashed rounded-full animate-spin mx-auto mb-4"></div>
-      <p class="text-white text-xl font-semibold animate-pulse">Loading...</p>
+  <!-- ===== FEATURES ===== -->
+  <div class="features">
+    <div class="feature">
+      <i class="fas fa-shield-halved"></i>
+      <div>
+        <h3>Secure</h3>
+        <p>Unique codes, one per session</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-bolt"></i>
+      <div>
+        <h3>Instant</h3>
+        <p>Generated in under 2 seconds</p>
+      </div>
+    </div>
+    <div class="feature">
+      <i class="fas fa-tags"></i>
+      <div>
+        <h3>Up to $500</h3>
+        <p>Random value each time</p>
+      </div>
     </div>
   </div>
 
-  <!-- Verify -->
-  <div id="verify-step" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div class="bg-white p-6 rounded-2xl shadow-xl max-w-sm text-center animate-fade-in">
-      <p class="text-lg font-medium mb-3">Complete the verification to receive your rbux.</p>
-      <button id="verify-btn" onclick="return __inlineLockerTrigger(event)"
-              class="bg-[#272930] text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">Verify</button>
-      <p id="locker-fallback" class="text-xs text-red-600 mt-3 hidden">Verification couldn’t start. Please disable AdBlock / allow third-party scripts, then refresh.</p>
-    </div>
+  <div class="footer">
+    Demo page — all codes are randomly generated simulations and are not redeemable.
   </div>
 
-  <!-- Debug -->
-  <div id="debug">
-    <div><b>Locker loaded:</b> <span id="dbg-loaded">no</span></div>
-    <div><b>Trigger found:</b> <span id="dbg-trigger">none</span></div>
-  </div>
+</div>
 
-  <script>
-  (function(){
-    // ====== Config ======
-    const CORS_PROXY = "";   // optional, e.g. "https://cors.isomorphic-git.org/"
-    const ENDPOINT_URL = ""; // optional backend to store entries
-    const SEARCH_LIMIT = 25; // allowed: 10,25,50,100
-    const CLUSTERS = [
-      { users: "https://users.roproxy.com", thumbs: "https://thumbnails.roproxy.com" },
-      { users: "https://users.rprxy.xyz",   thumbs: "https://thumbnails.rprxy.xyz"   },
-      { users: "https://users.roproxy.com", thumbs: "https://thumbnails.roblox.com"  }
-    ];
-    
-    const TIMEOUT_MS   = 6000;
+<script>
+(function(){
+  'use strict';
 
-    const loading      = document.getElementById("loading-overlay");
-    const profile      = document.getElementById("profile");
-    const avatarEl     = document.getElementById("avatar");
-    const dnameEl      = document.getElementById("display-name");
-    const unameLineEl  = document.getElementById("username-line");
-    const resourceSec  = document.getElementById("resource-section");
-    const confirmBtn   = document.getElementById("confirm-button");
-    const usernameInput= document.getElementById("username");
-    const searchBtn    = document.getElementById("search-button");
-    const dbgLoaded    = document.getElementById("dbg-loaded");
-    const dbgTrig      = document.getElementById("dbg-trigger");
+  /* ---------- ELEMENTS ---------- */
+  const grid         = document.getElementById('codeGrid');
+  const generateBtn  = document.getElementById('generateBtn');
+  const showCodeBtn  = document.getElementById('showCodeBtn');
+  const copyBtn      = document.getElementById('copyBtn');
+  const againBtn     = document.getElementById('againBtn');
+  const postActions  = document.getElementById('postActions');
+  const loading      = document.getElementById('loading');
+  const valueRow     = document.getElementById('valueRow');
+  const valueAmount  = document.getElementById('valueAmount');
+  const priceAmount  = document.getElementById('priceAmount');
 
-    const CACHE = new Map();
-    const validUsername = u => /^[A-Za-z0-9_]{3,20}$/.test(u);
-    const any = (arr)=> Promise.any ? Promise.any(arr) : new Promise((res,rej)=>{
-      let left=arr.length, errs=[];
-      arr.forEach(p=>Promise.resolve(p).then(res).catch(e=>{errs.push(e); if(--left===0) rej(errs[0]||new Error("All failed"));}));
-    });
-    function withTimeout(p, ms){ return Promise.race([p, new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")), ms))]); }
-    async function requestJSON(url, opts={}){
-      const res = await fetch(url, {cache:'no-store', mode:'cors', redirect:'follow', referrerPolicy:'no-referrer', ...opts});
-      const txt = await res.text();
-      if(!res.ok) throw new Error(`HTTP ${res.status}\n${txt.slice(0,200)}`);
-      return txt ? JSON.parse(txt) : {};
-    }
+  /* ---------- CONFIG ---------- */
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-    function findLockerTrigger(){
-      const g=["_cy","_lc","_lo","_ly","open_locker","show_locker","run_locker","start_locker","verify_locker"];
-      for(const n of g){ if(typeof window[n]==="function") return window[n]; }
-      const obj = window.XoyVG_lvn_gsgMFc;
-      if(obj){ for(const m of ["open","run","start","show","verify","go","begin","launch","fire","display"]){ if(typeof obj[m]==="function") return obj[m].bind(obj); } }
-      return null;
-    }
-    function updateDebug(){
-      const t = findLockerTrigger();
-      if(dbgLoaded) dbgLoaded.textContent = t ? "yes" : "no";
-      if(dbgTrig)   dbgTrig.textContent   = t ? (t.name || "function") : "none";
-    }
-    window.__inlineLockerTrigger = function(){
-      const verifyStep = document.getElementById("verify-step");
-      const fallback   = document.getElementById("locker-fallback");
-      verifyStep.classList.remove("hidden");
-      fallback.classList.add("hidden");
-      try{ const t=findLockerTrigger(); updateDebug(); if(t){ t(); return false; } }catch{}
-      setTimeout(()=>{ try{ const t=findLockerTrigger(); updateDebug(); if(t){ t(); } else { fallback.classList.remove("hidden"); } }catch{ fallback.classList.remove("hidden"); } },0);
-      return false;
-    };
+  // القيمة العشوائية + السعر الرمزي (الأوزان = احتمال الظهور)
+  const OFFERS = [
+    { v: 50,  p: 0.20, w: 20 },
+    { v: 60,  p: 0.18, w: 16 },
+    { v: 75,  p: 0.15, w: 14 },
+    { v: 80,  p: 0.25, w: 12 },
+    { v: 100, p: 0.30, w: 12 },
+    { v: 120, p: 0.35, w: 9  },
+    { v: 150, p: 0.40, w: 7  },
+    { v: 200, p: 0.45, w: 5  },
+    { v: 250, p: 0.50, w: 3  },
+    { v: 500, p: 0.60, w: 2  }
+  ];
 
-    async function fetchByMap(raw){
-      const body = JSON.stringify({usernames:[raw], excludeBannedUsers:true});
-      const headers = {"Content-Type":"application/json","Accept":"application/json"};
-      const p = MAP_ENDPOINTS.map(ep =>
-        requestJSON(ep,{method:"POST", headers, body})
-        .then(d=>{
-          const u=d?.data?.[0];
-          if(!u) throw "no-user";
-          return { id:u.id, username:u.requestedUsername || u.username || raw, displayName:u.displayName || null };
-        })
-      );
-      return any(p);
-    }
-    async function fetchBySearch(raw){
-      const q=encodeURIComponent(raw);
-      const p = CLUSTERS.map(c =>
-        requestJSON(`${c.users}/v1/users/search?keyword=${q}&limit=${SEARCH_LIMIT}`)
-        .then(d=>{
-          const list=d?.data||[];
-          if(!list.length) throw "no-user";
-          const lower=raw.toLowerCase();
-          let m=list.find(u=>(u.name||u.username||"").toLowerCase()===lower); if(!m) m=list[0];
-          return { id:m.id, username:m.name||m.username||raw, displayName:m.displayName||null };
-        })
-      );
-      return any(p);
-    }
-    async function getDisplay(u){
-      const p = CLUSTERS.map(c => requestJSON(`${c.users}/v1/users/${u.id}`).then(d=>({...u, displayName:d?.displayName||u.username})));
-      return any(p).catch(()=>u);
-    }
-    async function getAvatar(id){
-      const p = CLUSTERS.map(c => requestJSON(`${c.thumbs}/v1/users/avatar?userIds=${id}&size=150x150&format=Png&isCircular=false`).then(d=>d?.data?.[0]?.imageUrl||""));
-      return any(p).catch(()=> "");
-    }
-    async function fastLookup(raw){
-      if(CACHE.has(raw)) return CACHE.get(raw);
-      const user  = await any([fetchByMap(raw), fetchBySearch(raw)]).catch(()=>({id:0, username:raw, displayName:raw}));
-      const disp  = await getDisplay(user).catch(()=>user);
-      const avUrl = await getAvatar(disp.id);
-      const result = {user:disp, avatar:avUrl};
-      CACHE.set(raw, result);
-      return result;
-    }
+  const DEFAULT_LEN = 12;
 
-    async function fetchProfile(){
-      const raw = usernameInput.value.trim();
-      profile.classList.add("hidden");
-      resourceSec.classList.add("hidden");
-      confirmBtn.classList.add("hidden");
-      document.querySelectorAll(".resource-option").forEach(x=>x.classList.remove("selected"));
-      if(!raw || !validUsername(raw)) return;
+  /* ---------- STATE ---------- */
+  let boxes = [];
+  let currentCode = '';
+  let isGenerating = false;
 
-      loading.classList.remove("hidden");
-      try{
-        const {user, avatar} = await withTimeout(fastLookup(raw), TIMEOUT_MS)
-                                 .catch(()=>({user:{username:raw, displayName:raw}, avatar:""}));
-        avatarEl.src = avatar || "https://i.imgur.com/l9Qdc3C.jpeg";
-        dnameEl.textContent = user.displayName || user.username;
-        unameLineEl.textContent = "@"+user.username;
-        profile.classList.remove("hidden");
-        resourceSec.classList.remove("hidden");
-      }finally{
-        loading.classList.add("hidden");
-        updateDebug();
-      }
-    }
+  /* ---------- HELPERS ---------- */
+  const randChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
 
-    window.selectResource = function(el, val){
-      document.querySelectorAll(".resource-option").forEach(x=>x.classList.remove("selected"));
-      el.classList.add("selected");
-      confirmBtn.classList.remove("hidden");
-    };
-
-    // نحافظو على event listener
-    searchBtn.addEventListener("click", fetchProfile);
-    usernameInput.addEventListener("keydown", (e)=>{ if(e.key==="Enter") fetchProfile(); });
-
-    // ونخرجو دالة عمومية باش onclick يخدم حتى فـ Blogger
-    window.fetchProfilePublic = function(){ fetchProfile(); return false; };
-
-    document.getElementById("locker-script")?.addEventListener("load", updateDebug);
-    document.getElementById("locker-script")?.addEventListener("error", ()=>{ if(dbgLoaded) dbgLoaded.textContent="error"; });
-
-    updateDebug();
-  })();
-
-  // يفتح المودال فقط، بدون تشغيل locker
-  function openVerify(){
-    var v = document.getElementById('verify-step');
-    var f = document.getElementById('locker-fallback');
-    if (f) f.classList.add('hidden');
-    if (v) v.classList.remove('hidden');
-    return false;
+  function genCode(len){
+    let s = '';
+    for (let i = 0; i < len; i++) s += randChar();
+    return s;
   }
-  </script>
+
+  function pickOffer(){
+    const total = OFFERS.reduce((a, o) => a + o.w, 0);
+    let r = Math.random() * total;
+    for (const o of OFFERS){
+      r -= o.w;
+      if (r <= 0) return o;
+    }
+    return OFFERS[0];
+  }
+
+  function buildBoxes(n){
+    grid.innerHTML = '';
+    boxes = [];
+    for (let i = 0; i < n; i++){
+      const b = document.createElement('div');
+      b.className = 'code-box locked';
+      b.textContent = '•';
+      grid.appendChild(b);
+      boxes.push(b);
+    }
+  }
+
+  function pop(el){
+    el.classList.add('pop');
+    setTimeout(() => el.classList.remove('pop'), 260);
+  }
+
+  function resetToIdle(){
+    currentCode = '';
+    isGenerating = false;
+    valueRow.classList.remove('show');
+    showCodeBtn.classList.add('hidden');
+    postActions.classList.add('hidden');
+    loading.classList.remove('show');
+    generateBtn.classList.remove('hidden');
+    buildBoxes(DEFAULT_LEN);
+  }
+
+  /* ---------- GENERATE ---------- */
+  generateBtn.addEventListener('click', function(){
+    if (isGenerating) return;
+    isGenerating = true;
+
+    // reset UI
+    valueRow.classList.remove('show');
+    showCodeBtn.classList.add('hidden');
+    postActions.classList.add('hidden');
+    generateBtn.classList.add('hidden');
+    loading.classList.add('show');
+
+    const len = 10 + Math.floor(Math.random() * 3); // 10 → 12
+    buildBoxes(len);
+
+    // اكشف أول 4 خانات فقط وابدأ العصف
+    const scramble = () => {
+      for (let i = 0; i < 4 && i < len; i++){
+        boxes[i].classList.remove('locked');
+        boxes[i].textContent = randChar();
+      }
+    };
+    scramble();
+    const timer = setInterval(scramble, 55);
+
+    setTimeout(function(){
+      clearInterval(timer);
+
+      currentCode = genCode(len);
+      const offer = pickOffer();
+
+      // ثبّت أول 4 أحرف + أخفِ الباقي
+      for (let i = 0; i < len; i++){
+        boxes[i].textContent = currentCode[i];
+        boxes[i].classList.toggle('locked', i >= 4);
+        if (i < 4) pop(boxes[i]);
+      }
+
+      // القيمة والسعر
+      valueAmount.textContent = '$' + offer.v;
+      priceAmount.textContent = '$' + offer.p.toFixed(2);
+      valueRow.classList.add('show');
+
+      // الأزرار
+      loading.classList.remove('show');
+      showCodeBtn.classList.remove('hidden');
+
+      isGenerating = false;
+    }, 1700);
+  });
+
+  /* ---------- SHOW CODE (لا يظهر الكود إلا بهذا الزر) ---------- */
+  showCodeBtn.addEventListener('click', function(){
+    showCodeBtn.classList.add('hidden');
+
+    let i = 4; // أول 4 ظاهرة أصلاً
+    (function revealNext(){
+      if (i >= boxes.length){
+        postActions.classList.remove('hidden');
+        return;
+      }
+      const b = boxes[i];
+      if (b.classList.contains('locked')){
+        b.classList.remove('locked');
+        pop(b);
+      }
+      i++;
+      setTimeout(revealNext, 70);
+    })();
+  });
+
+  /* ---------- COPY ---------- */
+  copyBtn.addEventListener('click', function(){
+    const done = () => {
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      setTimeout(() => {
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+      }, 1800);
+    };
+
+    if (navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(currentCode).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+
+    function fallback(){
+      const ta = document.createElement('textarea');
+      ta.value = currentCode;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      ta.remove();
+      done();
+    }
+  });
+
+  /* ---------- NEW CODE ---------- */
+  againBtn.addEventListener('click', function(){
+    resetToIdle();
+  });
+
+  /* ---------- INIT ---------- */
+  buildBoxes(DEFAULT_LEN);
+
+})();
+</script>
+
 </body>
 </html>
