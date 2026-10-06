@@ -41,7 +41,6 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ambient glow */
 body::before{
   content:'';
   position:fixed;
@@ -70,7 +69,9 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:10px;
   margin-bottom:20px;
+  flex-wrap:wrap;
 }
 .brand{display:flex;align-items:center;gap:12px;}
 .play-logo{
@@ -80,6 +81,13 @@ body::before{
 .brand-name{display:block;font-size:17px;font-weight:500;letter-spacing:.2px;}
 .brand-sub{display:block;font-size:12px;color:var(--muted);margin-top:1px;}
 
+.badges{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* بادج Live */
 .live-pill{
   display:flex;align-items:center;gap:7px;
   font-size:11.5px;font-weight:500;
@@ -88,6 +96,7 @@ body::before{
   border:1px solid rgba(0,230,118,.22);
   padding:6px 12px;
   border-radius:999px;
+  white-space:nowrap;
 }
 .live-dot{
   width:6px;height:6px;border-radius:50%;
@@ -99,6 +108,37 @@ body::before{
   0%{box-shadow:0 0 0 0 rgba(0,230,118,.55);}
   70%{box-shadow:0 0 0 8px rgba(0,230,118,0);}
   100%{box-shadow:0 0 0 0 rgba(0,230,118,0);}
+}
+
+/* بادج المتصلين الآن */
+.online-pill{
+  display:flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:500;
+  color:#a7d4ff;
+  background:rgba(0,176,255,.09);
+  border:1px solid rgba(0,176,255,.22);
+  padding:6px 12px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.online-pill i{
+  font-size:11px;
+  color:var(--blue);
+}
+.online-pill .count{
+  font-family:'Roboto Mono',monospace;
+  font-weight:700;
+  color:#fff;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.3px;
+  min-width:34px;
+  text-align:center;
+  display:inline-block;
+  transition:color .3s ease, transform .3s ease;
+}
+.online-pill .count.bump{
+  color:var(--green);
+  transform:scale(1.08);
 }
 
 /* ---------- CARD ---------- */
@@ -336,6 +376,17 @@ body::before{
   .feature{display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;}
   .feature i{margin:0;font-size:17px;}
   .feature h3{margin:0 0 2px;}
+
+  .topbar{gap:8px;}
+  .brand-name{font-size:15.5px;}
+  .brand-sub{font-size:11px;}
+  .badges{gap:6px;}
+  .live-pill,.online-pill{padding:5px 10px;font-size:10.5px;}
+  .online-pill .count{min-width:30px;}
+}
+
+@media (max-width:380px){
+  .brand-sub{display:none;}
 }
 </style>
 
@@ -351,7 +402,6 @@ body::before{
   <!-- ===== TOP BAR ===== -->
   <div class="topbar">
     <div class="brand">
-      <!-- 🔁 استبدل هذا الـ SVG بشعارك إن أردت -->
       <svg class="play-logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path fill="#00A0FF" d="M47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0z"/>
         <path fill="#00E676" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z"/>
@@ -364,7 +414,16 @@ body::before{
       </div>
     </div>
 
-    <div class="live-pill"><span class="live-dot"></span> Live</div>
+    <div class="badges">
+      <!-- 👥 بادج المتصلين -->
+      <div class="online-pill" title="Users online now">
+        <i class="fas fa-user"></i>
+        <span class="count" id="onlineCount">1748</span>
+      </div>
+
+      <!-- 🟢 بادج Live -->
+      <div class="live-pill"><span class="live-dot"></span> Live</div>
+    </div>
   </div>
 
   <!-- ===== CARD ===== -->
@@ -454,7 +513,59 @@ body::before{
 (function(){
   'use strict';
 
-  /* ---------- ELEMENTS ---------- */
+  /* ============================================================
+     👥 عداد المتصلين الوهمي
+     ============================================================ */
+  const onlineEl = document.getElementById('onlineCount');
+
+  // القيمة الأولية
+  let onlineBase = 1748;
+  let onlineCurrent = onlineBase;
+
+  // نطاق التذبذب
+  const MIN_ONLINE = 1600;
+  const MAX_ONLINE = 1950;
+
+  // عرض الرقم
+  function renderOnline(val){
+    onlineEl.textContent = val.toLocaleString('en-US');
+  }
+  renderOnline(onlineCurrent);
+
+  // كل فترة قصيرة نغير الرقم بشكل طبيعي
+  function tickOnline(){
+    // فرق عشوائي بين -7 و +9
+    const delta = Math.floor(Math.random() * 17) - 7;
+    onlineCurrent += delta;
+
+    // حافظ على الحدود
+    if (onlineCurrent < MIN_ONLINE) onlineCurrent = MIN_ONLINE + Math.floor(Math.random() * 20);
+    if (onlineCurrent > MAX_ONLINE) onlineCurrent = MAX_ONLINE - Math.floor(Math.random() * 20);
+
+    // قفزة كبيرة أحياناً لإعطاء إحساس النشاط
+    if (Math.random() < 0.06){
+      onlineCurrent += Math.floor(Math.random() * 40) + 10;
+      if (onlineCurrent > MAX_ONLINE) onlineCurrent = MAX_ONLINE - Math.floor(Math.random() * 15);
+    }
+
+    renderOnline(onlineCurrent);
+
+    // تأثير بصري خفيف عند الزيادة
+    if (delta > 0){
+      onlineEl.classList.add('bump');
+      setTimeout(() => onlineEl.classList.remove('bump'), 350);
+    }
+
+    // الفاصل الزمني القادم عشوائي أيضاً
+    setTimeout(tickOnline, 1500 + Math.random() * 2500);
+  }
+
+  // بدء النبض بعد 2 ثانية
+  setTimeout(tickOnline, 2000);
+
+  /* ============================================================
+     💳 مولّد الأكواد (كما هو)
+     ============================================================ */
   const grid         = document.getElementById('codeGrid');
   const generateBtn  = document.getElementById('generateBtn');
   const showCodeBtn  = document.getElementById('showCodeBtn');
@@ -466,10 +577,8 @@ body::before{
   const valueAmount  = document.getElementById('valueAmount');
   const priceAmount  = document.getElementById('priceAmount');
 
-  /* ---------- CONFIG ---------- */
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-  // القيمة العشوائية + السعر الرمزي (الأوزان = احتمال الظهور)
   const OFFERS = [
     { v: 50,  p: 0.20, w: 20 },
     { v: 60,  p: 0.18, w: 16 },
@@ -485,12 +594,10 @@ body::before{
 
   const DEFAULT_LEN = 12;
 
-  /* ---------- STATE ---------- */
   let boxes = [];
   let currentCode = '';
   let isGenerating = false;
 
-  /* ---------- HELPERS ---------- */
   const randChar = () => CHARS[Math.floor(Math.random() * CHARS.length)];
 
   function genCode(len){
@@ -537,22 +644,19 @@ body::before{
     buildBoxes(DEFAULT_LEN);
   }
 
-  /* ---------- GENERATE ---------- */
   generateBtn.addEventListener('click', function(){
     if (isGenerating) return;
     isGenerating = true;
 
-    // reset UI
     valueRow.classList.remove('show');
     showCodeBtn.classList.add('hidden');
     postActions.classList.add('hidden');
     generateBtn.classList.add('hidden');
     loading.classList.add('show');
 
-    const len = 10 + Math.floor(Math.random() * 3); // 10 → 12
+    const len = 10 + Math.floor(Math.random() * 3);
     buildBoxes(len);
 
-    // اكشف أول 4 خانات فقط وابدأ العصف
     const scramble = () => {
       for (let i = 0; i < 4 && i < len; i++){
         boxes[i].classList.remove('locked');
@@ -568,19 +672,16 @@ body::before{
       currentCode = genCode(len);
       const offer = pickOffer();
 
-      // ثبّت أول 4 أحرف + أخفِ الباقي
       for (let i = 0; i < len; i++){
         boxes[i].textContent = currentCode[i];
         boxes[i].classList.toggle('locked', i >= 4);
         if (i < 4) pop(boxes[i]);
       }
 
-      // القيمة والسعر
       valueAmount.textContent = '$' + offer.v;
       priceAmount.textContent = '$' + offer.p.toFixed(2);
       valueRow.classList.add('show');
 
-      // الأزرار
       loading.classList.remove('show');
       showCodeBtn.classList.remove('hidden');
 
@@ -588,11 +689,10 @@ body::before{
     }, 1700);
   });
 
-  /* ---------- SHOW CODE (لا يظهر الكود إلا بهذا الزر) ---------- */
   showCodeBtn.addEventListener('click', function(){
     showCodeBtn.classList.add('hidden');
 
-    let i = 4; // أول 4 ظاهرة أصلاً
+    let i = 4;
     (function revealNext(){
       if (i >= boxes.length){
         postActions.classList.remove('hidden');
@@ -608,7 +708,6 @@ body::before{
     })();
   });
 
-  /* ---------- COPY ---------- */
   copyBtn.addEventListener('click', function(){
     const done = () => {
       copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
@@ -636,12 +735,10 @@ body::before{
     }
   });
 
-  /* ---------- NEW CODE ---------- */
   againBtn.addEventListener('click', function(){
     resetToIdle();
   });
 
-  /* ---------- INIT ---------- */
   buildBoxes(DEFAULT_LEN);
 
 })();
